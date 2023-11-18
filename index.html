@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="background: var(--bg)">
+    <!-- header -->
+    <header class="header">
+      <h1>Vending Machine Simulator</h1>
+    </header>
+
+    <!-- left side -->
+    <div class="sidebar">
+      <div class="container_menu">
+        <h3>Menu</h3>
+        <div class="menu" id="">
+          <ul>
+            <li>
+              <a href="#mineral" class="active" onclick="setActive('mineral')"
+                >> Mineral Water</a
+              >
+            </li>
+            <li><a href="#soda" onclick="setActive('soda')">> Soda</a></li>
+            <li><a href="#coffe" onclick="setActive('coffe')">> Coffe</a></li>
+            <li><a href="#juice" onclick="setActive('juice')">> Juice</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container_cs">
+        <h3>Customer Service</h3>
+        <div class="cs">
+          <ul>
+            <li><a href="#" onclick="toggleSection('pre')">> Need Help</a></li>
+            <li><a href="#" onclick="toggleSection('pre')">> Report</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="img">
+        <a href="#" onclick="toggleSection('login')"
+          ><img src="assets/b.svg" alt="" width="50px"
+        /></a>
+      </div>
+    </div>
+
+    <!-- admin -->
+    <div class="container" id="login">
+      <section class="login-box" id="admin">
+        <h2>Login Admin</h2>
+        <form action="admin.php" method="post">
+          <input type="text" placeholder="username" id="username" />
+          <input type="password" placeholder="password" id="password" />
+          <input type="submit" value="Login" />
+        </form>
+        <a href="#" onclick="closeSection('login')">Keluar</a>
+      </section>
+    </div>
+
+    <!-- pre memory -->
+    <div class="containerpre" id="pre">
+      <section class="pre">
+        <h1>no content</h1>
+        <a href="#" onclick="closeSection('pre')">Keluar</a>
+      </section>
+    </div>
+
+    <!-- sidebar right -->
+    <div class="sidebarr" id="side">
+      <div class="container-cart">
+        <div class="title">
+          <h3>Cart</h3>
+          <img src="assets/a.svg" alt="logo" width="40px" />
+        </div>
+        <div id="cart">
+          <ul id="cart-items"></ul>
+        </div>
+        <p class="p">Total Harga: Rp. <span id="totalPrice">0</span></p>
+        <form id="payment-form" onsubmit="submitPayment(event)">
+          <input
+            type="number"
+            id="amount"
+            step="0.01"
+            required
+            placeholder="Masukan Tunai"
+          />
+          <button type="submit" id="buy-button">Beli</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- vending -->
+    <div
+      class="scrol"
+      data-bs-spy="scroll"
+      data-bs-target="#navbar-example3"
+      id="hero"
+    >
+      <section class="hero" id="mineral">
+        <div class="mid">
+          <div class="water">
+            <div class="judul">
+              <h2>Mineral Water</h2>
+            </div>
+            <div class="object">
+              <div class="a">
+                <img
+                  src="img/sp-aqua-air-minum-dalam-kemasanz1_9a1676949610731-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 4.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Aqua', 4000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="b">
+                <img
+                  src="img/le-minerale-malaysia-cover-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 5.000 /Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Le Mineral', 5000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="c">
+                <img
+                  src="img/aeb5d08d-0a1d-4727-a3c4-e60c11f98ed2-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 6.000 /Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Pure Life', 6000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero" id="soda">
+        <div class="mid">
+          <div class="water">
+            <div class="judul">
+              <h2>Soda</h2>
+            </div>
+            <div class="object">
+              <div class="a">
+                <img
+                  src="img/gambar1645602650-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 5.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Cola', 5000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="b">
+                <img
+                  src="img/20065780_2-removebg-preview.png"
+                  alt="object"
+                  height="200px"
+                />
+                <p>Rp. 4.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Fanta', 4000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="c">
+                <img
+                  src="img/download-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 4.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Sprite', 4000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero" id="coffe">
+        <div class="mid">
+          <div class="water">
+            <div class="judul">
+              <h2>Coffe</h2>
+            </div>
+            <div class="object">
+              <div class="a">
+                <img
+                  src="img/coffe/7c491af44ee69ab874ea25f3d629bc10-removebg-preview (1).png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 9.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('ice Black', 9000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="b">
+                <img
+                  src="img/coffe/download-removebg-preview.png"
+                  alt="object"
+                  height="200px"
+                />
+                <p>Rp. 8.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Caramel', 8000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="c">
+                <img
+                  src="img/coffe/e03e1df6a831d25749a577c52d7cae12.jpg_720x720q80-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 7.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Cappucino', 7000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero" id="juice">
+        <div class="mid">
+          <div class="water">
+            <div class="judul">
+              <h2>Juice</h2>
+            </div>
+            <div class="object">
+              <div class="a">
+                <img
+                  src="img/juice/download-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 8.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Orange', 8000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="b">
+                <img
+                  src="img/juice/images-removebg-preview.png"
+                  alt="object"
+                  height="200px"
+                />
+                <p>Rp. 8.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Apple', 8000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+              <div class="c">
+                <img
+                  src="img/juice/images__1_-removebg-preview.png"
+                  alt="object"
+                  height="210px"
+                />
+                <p>Rp. 8.000/Pcs</p>
+                <p>
+                  <button
+                    onclick="addToCart('Mango', 8000); sideActive('side'); heroSide('hero')"
+                  >
+                    Add To Cart
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
